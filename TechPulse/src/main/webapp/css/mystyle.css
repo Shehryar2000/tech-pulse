@@ -1,0 +1,28 @@
+@charset "UTF-8";
+
+.primary-background {
+	background: #303F9F;
+}
+
+.secondary-bg {
+	background: #3F51B5;
+}
+
+/* Custom card styles */
+.custom-card {
+	border: 2px solid #303F9F; /* Card border color */
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	/* Optional shadow for card */
+}
+
+/* Button with primary background */
+.custom-card .btn {
+	background-color: #3F51B5;
+	border-color: #303F9F;
+	color: white;
+}
+
+.custom-card .btn:hover {
+	background-color: #303F9F; /* Darker shade for hover effect */
+	border-color: #1C287A;
+}
