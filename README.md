@@ -1,2 +1,2 @@
 # tech-pulse
-JSP Srvlet Based Blogging Website
+JSP Servlet Based Blogging Website
