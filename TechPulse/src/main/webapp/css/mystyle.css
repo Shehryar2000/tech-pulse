@@ -1,28 +1,64 @@
-@charset "UTF-8";
-
+/* Set the primary and secondary colors */
 .primary-background {
-	background: #303F9F;
+	background-color: #303F9F; /* Primary background color */
 }
 
 .secondary-bg {
-	background: #3F51B5;
+	background-color: #3F51B5; /* Secondary background color */
+}
+
+.banner-bg {
+	clip-path: polygon(30% 0%, 70% 0%, 100% 0, 100% 92%, 65% 100%, 33% 92%, 0 100%, 0 0
+		);
+}
+
+.banner-login-bg {
+	clip-path: ellipse(81% 61% at 50% 39%);
 }
 
 /* Custom card styles */
 .custom-card {
 	border: 2px solid #303F9F; /* Card border color */
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-	/* Optional shadow for card */
+	/* Optional shadow for the card */
 }
 
-/* Button with primary background */
+/* Button default state - secondary background */
 .custom-card .btn {
-	background-color: #3F51B5;
-	border-color: #303F9F;
-	color: white;
+	background-color: #3F51B5; /* secondary-bg */
+	border: 2px solid #303F9F; /* Same as card border */
+	color: white; /* White text */
+	transition: background-color 0.3s ease, border-color 0.3s ease;
+	/* Smooth transition for color change */
 }
 
+/* Button hover state - primary background */
 .custom-card .btn:hover {
-	background-color: #303F9F; /* Darker shade for hover effect */
-	border-color: #1C287A;
+	background-color: #303F9F; /* primary-background */
+	border-color: #1C287A; /* Darker shade of primary */
+	color: white; /* Ensure text stays white on hover */
+}
+
+/* Unified Button Styles */
+.btn-standard {
+	background-color: #3F51B5; /* Secondary background */
+	border: 2px solid #303F9F; /* Border color matching the card */
+	color: white; /* White text */
+	text-align: center; /* Centered text */
+	text-decoration: none; /* Remove underline for links */
+	transition: background-color 0.3s ease, border-color 0.3s ease;
+	display: inline-block; /* Ensures proper size for link-based buttons */
+	width: auto; /* Auto width for buttons */
+}
+
+.btn-standard:hover {
+	background-color: #303F9F; /* Primary background on hover */
+	border-color: #1C287A; /* Darker shade of primary for border */
+	color: white; /* Ensures the text stays white */
+}
+
+.card-header-custom {
+	background-color: #3F51B5;
+	color: white;
+	text-align: center;
 }

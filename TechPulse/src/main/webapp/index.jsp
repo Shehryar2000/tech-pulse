@@ -42,7 +42,7 @@
 			<p>It empowers developers with insightful tutorials, news, and
 				hands-on project guides.</p>
 
-			<a href="signup.jsp" class="btn btn-outline-light">
+			<a href="register.jsp" class="btn btn-outline-light">
 				<span class="fa fa-user-plus me-2"></span>Start Free
 			</a>
 			<a href="login.jsp" class="btn btn-outline-light">
