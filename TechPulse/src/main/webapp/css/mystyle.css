@@ -62,3 +62,18 @@
 	color: white;
 	text-align: center;
 }
+
+.loader-color {
+	color: #3F51B5;
+}
+
+/* Make the modal box smaller and centered */
+.swal-modal {
+	width: 320px;
+	padding: 20px;
+	text-align: center;
+}
+
+.swal-footer {
+	text-align: center !important;
+}

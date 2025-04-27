@@ -1,5 +1,7 @@
+<%@page import="com.tech.pulse.entities.Message"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@page errorPage="error_page.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,7 +27,8 @@
 
 	<%@include file="includes/navbar_normal.jsp"%>
 
-	<main class="d-flex align-items-center secondary-bg banner-login-bg py-5 px-3"
+	<main
+		class="d-flex align-items-center secondary-bg banner-login-bg py-5 px-3"
 		style="min-height: 70vh">
 		<div class="container">
 			<div class="row">
@@ -36,22 +39,37 @@
 							<span class="fa fa-user-circle fa-2x"></span>
 							<p class="mb-0">Login here</p>
 						</div>
+
+						<%
+						Message m = (Message) session.getAttribute("msg");
+
+						if (m != null) {
+						%>
+
+						<div class="alert <%=m.getCssClasss()%>" role="alert">
+							<%=m.getContent()%></div>
+
+						<%
+						session.removeAttribute("msg");
+						}
+						%>
+
 						<div class="card-body">
-							<form>
+							<form action="LoginServlet" method="POST">
 								<div class="mb-3">
 									<label for="email" class="form-label">Email</label> <input
-										type="email" class="form-control" id="email"
+										type="email" class="form-control" name="loginEmail" required
 										placeholder="Enter your email">
 								</div>
 								<div class="mb-3">
 									<label for="password" class="form-label">Password</label> <input
-										type="password" class="form-control" id="password"
-										placeholder="Enter your password">
+										type="password" class="form-control" name="loginPassword"
+										required placeholder="Enter your password">
 								</div>
 								<div class="mb-3 form-check">
-									<input class="form-check-input" type="checkbox" id="rememberMe">
-									<label class="form-check-label" for="rememberMe">Remember
-										me</label>
+									<input class="form-check-input" type="checkbox"
+										name="loginRemember"> <label class="form-check-label"
+										for="rememberMe">Remember me</label>
 								</div>
 								<button type="submit" class="btn btn-standard w-100">Sign
 									in</button>
