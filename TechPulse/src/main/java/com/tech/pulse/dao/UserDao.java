@@ -32,7 +32,7 @@ public class UserDao {
 			pstmt.setString(4, user.getGender());
 			pstmt.setString(5, user.getAbout());
 
-			// pstmt.executeUpdate();
+			pstmt.executeUpdate();
 			flag = true;
 
 		} catch (Exception e) {
@@ -65,6 +65,7 @@ public class UserDao {
 				int userId = result.getInt("id");
 				String userName = result.getString("name");
 				String userEmail = result.getString("email");
+				String userPassword = result.getString("password");
 				String gender = result.getString("gender");
 				String about = result.getString("about");
 				Timestamp timeStamp = result.getTimestamp("reg_date");
@@ -73,6 +74,7 @@ public class UserDao {
 				user.setId(userId);
 				user.setName(userName);
 				user.setEmail(userEmail);
+				user.setPassword(userPassword);
 				user.setGender(gender);
 				user.setAbout(about);
 				user.setDateTime(timeStamp);
@@ -84,6 +86,34 @@ public class UserDao {
 		}
 
 		return user;
+	}
+
+	// Update Profile
+
+	public boolean updateProfile(User user) {
+
+		boolean flag = false;
+
+		try {
+
+			String query = "UPDATE user SET name=?, email=?, password=?, about=?, profile=? WHERE id =?";
+			PreparedStatement pstmt = con.prepareStatement(query);
+
+			pstmt.setString(1, user.getName());
+			pstmt.setString(2, user.getEmail());
+			pstmt.setString(3, user.getPassword());
+			pstmt.setString(4, user.getAbout());
+			pstmt.setString(5, user.getProfile());
+			pstmt.setInt(6, user.getId());
+
+			pstmt.executeUpdate();
+			flag = true;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return flag;
 	}
 
 }

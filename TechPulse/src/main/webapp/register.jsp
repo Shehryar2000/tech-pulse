@@ -67,12 +67,12 @@
 									<div class="col-sm-10">
 										<div class="form-check">
 											<input class="form-check-input" type="radio" name="gender"
-												value="male" checked> <label
+												value="Male" checked> <label
 												class="form-check-label" for="gridRadios1"> Male </label>
 										</div>
 										<div class="form-check">
 											<input class="form-check-input" type="radio" name="gender"
-												value="female"> <label class="form-check-label"
+												value="Female"> <label class="form-check-label"
 												for="gridRadios2"> Female </label>
 										</div>
 									</div>

@@ -57,6 +57,24 @@
 	color: white; /* Ensures the text stays white */
 }
 
+/* White Button Styles */
+.btn-white {
+	background-color: white; 
+	border: 2px solid #303F9F; /* Border color matching the card */
+	color: #303F9F; /* White text */
+	text-align: center; /* Centered text */
+	text-decoration: none; /* Remove underline for links */
+	transition: background-color 0.3s ease, border-color 0.3s ease;
+	display: inline-block; /* Ensures proper size for link-based buttons */
+	width: auto; /* Auto width for buttons */
+}
+
+.btn-white:hover {
+	background-color: #3F51B5; /* Primary background on hover */
+	border-color: #1C287A; /* Darker shade of primary for border */
+	color: white; /* Ensures the text stays white */
+}
+
 .card-header-custom {
 	background-color: #3F51B5;
 	color: white;
@@ -76,4 +94,8 @@
 
 .swal-footer {
 	text-align: center !important;
+}
+
+.btn-close-white {
+	filter: invert(1);
 }

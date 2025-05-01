@@ -33,8 +33,6 @@ public class LoginServlet extends HttpServlet {
 		String email = request.getParameter("loginEmail");
 		String password = request.getParameter("loginPassword");
 
-		System.out.println(email + " | " + password);
-
 		UserDao userDao = new UserDao(ConnectionProvider.getConnection());
 		User user = userDao.getUserByEmailAndPassword(email, password);
 
