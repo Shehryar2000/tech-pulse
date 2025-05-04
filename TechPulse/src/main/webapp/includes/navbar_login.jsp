@@ -214,7 +214,7 @@ User user = (User) session.getAttribute("currentUser");
 					enctype="multipart/form-data">
 
 					<div class="form-group mt-3">
-						<select class="form-control mt-3">
+						<select class="form-control mt-3" name="catID">
 							<option selected disabled>---Select Category---</option>
 
 							<%
@@ -222,11 +222,8 @@ User user = (User) session.getAttribute("currentUser");
 							ArrayList<Category> list = postDao.getAllCategories();
 
 							for (Category c : list) {
-												
 							%>
-
-							<option><%= c.getName()%></option>
-
+							<option value="<%=c.getId()%>"><%=c.getName()%></option>
 							<%
 							}
 							%>
@@ -254,22 +251,34 @@ User user = (User) session.getAttribute("currentUser");
 					</div>
 
 
-					<div class="container mt-3">
+					<div class="container text-center mt-3">
+						<button type="submit" class="btn btn-white w-100">Post
+							Now</button>
+					</div>
 
-						<button type="submit" class="btn btn-white">Save</button>
-
+					<div class="container text-center mt-2 mb-2">
+						<button type="button" class="btn btn-secondary w-100"
+							data-bs-dismiss="modal">Close</button>
 					</div>
 
 
 				</form>
 
 			</div>
+
+			<!--  
+			
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary"
 					data-bs-dismiss="modal">Close</button>
-				<button id="edit-profile-btn" type="button" class="btn btn-standard">Edit
-					Profile</button>
+				
+				<button id="add-post-btn" type="submit" class="btn btn-white">Post
+					Now</button>
+	
 			</div>
+			
+			-->
+
 		</div>
 	</div>
 </div>
@@ -292,8 +301,8 @@ session.removeAttribute("msg");
 }
 %>
 
-<script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"
-	integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8="
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"
+	integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
 	crossorigin="anonymous"></script>
 
 <script
@@ -301,14 +310,17 @@ session.removeAttribute("msg");
 	integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
 	crossorigin="anonymous"></script>
 
-<!-- JavaScript for Edit Profile Button -->
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+
 <script>
+<!-- JavaScript for Edit Profile Button -->
 	$(document).ready(function() {
 
 		let editStatus = false;
 
 		$("#edit-profile-btn").click(function() {
-
+			console.log("Edit Button Clicked")
 			if (editStatus == false) {
 
 				$("#profile-details").hide();
@@ -328,4 +340,94 @@ session.removeAttribute("msg");
 
 		});
 	});
+</script>
+
+<!-- JavaScript for Add Post Button -->
+
+<script>
+	$(document)
+			.ready(
+					function(e) {
+
+						$("form[action='AddPostServlet']")
+								.on(
+										"submit",
+										function(event) {
+
+											// This method will execute when post form submitted.
+
+											event.preventDefault();
+											console
+													.log("Post Button Clicked...");
+
+											let form = new FormData(this);
+
+											// Requesting to server via AJAX
+
+											$
+													.ajax({
+
+														url : "AddPostServlet",
+														type : "POST",
+														data : form,
+														success : function(
+																data,
+																textStatus,
+																jqXHR) {
+
+															if (data.trim() == "done") {
+
+																swal(
+																		{
+																			title : "Congratulations!",
+																			text : "Your post has been posted!",
+																			icon : "success",
+																			buttons : {
+																				confirm : {
+																					className : "btn btn-standard swal-login-btn text-center"
+																				}
+																			}
+																		})
+																		.then(
+																				function() {
+																					// window.location = "login.jsp";
+																				});
+															} else {
+
+																swal({
+																	title : "Oops!",
+																	text : "Something went wrong",
+																	icon : "error",
+																	buttons : {
+																		confirm : {
+																			className : "btn btn-standard swal-login-btn text-center"
+																		}
+																	}
+																});
+															}
+
+														},
+														error : function(jqXHR,
+																textStatus,
+																errorThrown) {
+
+															swal({
+																title : "Oops!",
+																text : "Something went wrong",
+																icon : "error",
+																buttons : {
+																	confirm : {
+																		className : "btn btn-standard swal-login-btn text-center"
+																	}
+																}
+															});
+
+														},
+														processData : false,
+														contentType : false
+
+													});
+										});
+
+					});
 </script>

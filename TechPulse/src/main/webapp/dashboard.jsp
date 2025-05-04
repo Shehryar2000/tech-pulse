@@ -36,34 +36,98 @@ if (session.getAttribute("currentUser") == null) {
 
 	<%@include file="includes/navbar_login.jsp"%>
 
-	<%
-	User u = (User) session.getAttribute("currentUser");
-	%>
-	<div class="container mt-4">
-		<p>
-			Name:
-			<%=u.getName()%></p>
-		<p>
-			Email:
-			<%=u.getEmail()%></p>
-		<p>
-			Gender:
-			<%=u.getGender()%></p>
-		<p>
-			About:
-			<%=u.getAbout()%></p>
-		<p>
-			Profile:
-			<%=u.getProfile()%></p>
-		<p>
-			DateTime:
-			<%=u.getDateTime()%></p>
-	</div>
+	<main>
+		<div class="container">
+
+			<div class="row mt-4">
+
+				<div class="col-md-4">
+
+					<!-- Display All Categories -->
+					<div class="list-group">
+						<a href="#" onclick="getPosts(0,this)"
+							class="list-group-item list-group-item-action c-link"
+							aria-current="true">All Posts</a>
+
+						<%
+						PostDao pd = new PostDao(ConnectionProvider.getConnection());
+						ArrayList<Category> catList = pd.getAllCategories();
+
+						for (Category cat : catList) {
+						%>
+
+						<a href="#" onclick="getPosts(<%=cat.getId()%>,this)"
+							class="list-group-item list-group-item-action c-link"><%=cat.getName()%></a>
+
+						<%
+						}
+						%>
+
+					</div>
+
+				</div>
+
+				<div class="col-md-8">
+
+					<!-- Display all post as per selected category -->
+
+					<div class="container text-center" id="loader">
+						<i class="fa fa-refresh fa-2x fa-spin loader-color"></i>
+						<h6 class="mt-2">Loading Posts...</h6>
+					</div>
+
+					<div class="container-fluid" id="post-container"></div>
+
+				</div>
+
+			</div>
+
+		</div>
+	</main>
+
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js"
+		integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+		crossorigin="anonymous"></script>
 
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
 		crossorigin="anonymous"></script>
+
+
+	<!-- Load Posts Using AJAX -->
+	<script>
+		function getPosts(catId,ref) {
+
+			$("#loader").show();
+			$("#post-container").hide();
+			$(".c-link").removeClass("active");
+
+			$.ajax({
+				url : "post.jsp",
+				data : {
+					cid : catId
+				},
+				success : function(data) {
+					// Properly insert the HTML into the DOM
+					$("#loader").hide();
+					$("#post-container").show();
+					$('#post-container').html(data);
+					$(ref).addClass("active");
+				},
+				error : function(jqXHR, textStatus, errorThrown) {
+					console.error("AJAX Error:", errorThrown);
+				}
+			});
+
+		}
+
+		$(document).ready(function() {
+
+			let firstListRef = $(".c-link")[0]
+			getPosts(0,firstListRef);
+		});
+	</script>
 
 </body>
 </html>

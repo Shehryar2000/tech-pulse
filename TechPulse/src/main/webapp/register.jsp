@@ -151,7 +151,7 @@
 																$("#loader")
 																		.hide();
 
-																if (data.trim() === 'Done') {
+																if (data.trim() == 'Done') {
 
 																	swal(
 																			{

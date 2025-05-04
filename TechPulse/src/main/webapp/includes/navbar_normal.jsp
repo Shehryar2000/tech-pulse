@@ -1,6 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark primary-background">
 	<div class="container-fluid">
-		<a class="navbar-brand" href="index.jsp"><span class="fa fa-paper-plane-o me-2"></span>TechPulse</a>
+		<a class="navbar-brand" href="index.jsp"><span
+			class="fa fa-paper-plane-o me-2"></span>TechPulse</a>
 		<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
 			data-bs-target="#navbarSupportedContent"
 			aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -23,8 +24,6 @@
 						<li><hr class="dropdown-divider"></li>
 						<li><a class="dropdown-item" href="#">AI</a></li>
 					</ul></li>
-				<li class="nav-item"><a class="nav-link disabled"
-					aria-disabled="true">2025</a></li>
 			</ul>
 			<form class="d-flex" role="search">
 				<input class="form-control me-2" type="search" placeholder="Search"

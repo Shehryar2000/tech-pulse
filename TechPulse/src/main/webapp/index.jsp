@@ -1,3 +1,8 @@
+<%@page import="com.tech.pulse.entities.Post"%>
+<%@page import="java.util.List"%>
+<%@page import="com.tech.pulse.entities.Category"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.tech.pulse.dao.PostDao"%>
 <%@page import="com.tech.pulse.helper.ConnectionProvider"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -24,7 +29,8 @@
 
 <style>
 .banner-bg {
-	clip-path: polygon(30% 0%, 70% 0%, 100% 0, 100% 92%, 65% 100%, 33% 92%, 0 100%, 0 0);
+	clip-path: polygon(30% 0%, 70% 0%, 100% 0, 100% 92%, 65% 100%, 33% 92%, 0 100%, 0 0
+		);
 }
 </style>
 
@@ -42,11 +48,10 @@
 			<p>It empowers developers with insightful tutorials, news, and
 				hands-on project guides.</p>
 
-			<a href="register.jsp" class="btn btn-outline-light">
-				<span class="fa fa-user-plus me-2"></span>Start Free
-			</a>
-			<a href="login.jsp" class="btn btn-outline-light">
-				<span class="fa fa-user me-2"></span>Login
+			<a href="register.jsp" class="btn btn-outline-light"> <span
+				class="fa fa-user-plus me-2"></span>Start Free
+			</a> <a href="login.jsp" class="btn btn-outline-light"> <span
+				class="fa fa-user me-2"></span>Login
 			</a>
 		</div>
 	</div>
@@ -54,126 +59,38 @@
 	<!-- Cards Section -->
 	<div class="container py-5">
 
-		<!-- First Card Row -->
-
 		<div class="row">
-			<!-- Card 1 -->
+			<%
+			PostDao postDao = new PostDao(ConnectionProvider.getConnection());
+			List<Post> postList = postDao.getAllPost();
+
+			for (Post post : postList) {
+			%>
+
 			<div class="col-md-3 mb-4">
-				<div class="card custom-card" style="width: 100%;">
+				<div class="card custom-card card-uniform">
+
+					<!-- Fixed-height image container -->
+					<div class="card-img-container">
+						<img src="blog_pics/<%=post.getPhoto()%>" class="card-img-top">
+					</div>
+
 					<div class="card-body">
-						<h5 class="card-title">Java Core</h5>
-						<p class="card-text">Cover important topics of core Java
-							including collection, interface, stream API, lambda expression,
-							functional interface.</p>
-						<a href="#" class="btn primary-background text-white">Read
+						<h5 class="card-title"><%=post.getTitle()%></h5>
+						<p class="card-text">
+							<%=post.getContent()%>
+						</p>
+						<a href="#" class="btn primary-background text-white mt-auto">Read
 							More</a>
 					</div>
+
 				</div>
 			</div>
 
-			<!-- Card 2 -->
-			<div class="col-md-3 mb-4">
-				<div class="card custom-card" style="width: 100%;">
-					<div class="card-body">
-						<h5 class="card-title">Java Core</h5>
-						<p class="card-text">Cover important topics of core Java
-							including collection, interface, stream API, lambda expression,
-							functional interface.</p>
-						<a href="#" class="btn primary-background text-white">Read
-							More</a>
-					</div>
-				</div>
-			</div>
-
-			<!-- Card 3 -->
-			<div class="col-md-3 mb-4">
-				<div class="card custom-card" style="width: 100%;">
-					<div class="card-body">
-						<h5 class="card-title">Java Core</h5>
-						<p class="card-text">Cover important topics of core Java
-							including collection, interface, stream API, lambda expression,
-							functional interface.</p>
-						<a href="#" class="btn primary-background text-white">Read
-							More</a>
-					</div>
-				</div>
-			</div>
-
-			<!-- Card 4 -->
-			<div class="col-md-3 mb-4">
-				<div class="card custom-card" style="width: 100%;">
-					<div class="card-body">
-						<h5 class="card-title">Java Core</h5>
-						<p class="card-text">Cover important topics of core Java
-							including collection, interface, stream API, lambda expression,
-							functional interface.</p>
-						<a href="#" class="btn primary-background text-white">Read
-							More</a>
-					</div>
-				</div>
-			</div>
+			<%
+			}
+			%>
 		</div>
-
-		<!-- Second Card Row -->
-
-		<div class="row">
-			<!-- Card 1 -->
-			<div class="col-md-3 mb-4">
-				<div class="card custom-card" style="width: 100%;">
-					<div class="card-body">
-						<h5 class="card-title">Java Core</h5>
-						<p class="card-text">Cover important topics of core Java
-							including collection, interface, stream API, lambda expression,
-							functional interface.</p>
-						<a href="#" class="btn primary-background text-white">Read
-							More</a>
-					</div>
-				</div>
-			</div>
-
-			<!-- Card 2 -->
-			<div class="col-md-3 mb-4">
-				<div class="card custom-card" style="width: 100%;">
-					<div class="card-body">
-						<h5 class="card-title">Java Core</h5>
-						<p class="card-text">Cover important topics of core Java
-							including collection, interface, stream API, lambda expression,
-							functional interface.</p>
-						<a href="#" class="btn primary-background text-white">Read
-							More</a>
-					</div>
-				</div>
-			</div>
-
-			<!-- Card 3 -->
-			<div class="col-md-3 mb-4">
-				<div class="card custom-card" style="width: 100%;">
-					<div class="card-body">
-						<h5 class="card-title">Java Core</h5>
-						<p class="card-text">Cover important topics of core Java
-							including collection, interface, stream API, lambda expression,
-							functional interface.</p>
-						<a href="#" class="btn primary-background text-white">Read
-							More</a>
-					</div>
-				</div>
-			</div>
-
-			<!-- Card 4 -->
-			<div class="col-md-3 mb-4">
-				<div class="card custom-card" style="width: 100%;">
-					<div class="card-body">
-						<h5 class="card-title">Java Core</h5>
-						<p class="card-text">Cover important topics of core Java
-							including collection, interface, stream API, lambda expression,
-							functional interface.</p>
-						<a href="#" class="btn primary-background text-white">Read
-							More</a>
-					</div>
-				</div>
-			</div>
-		</div>
-
 
 	</div>
 

@@ -26,7 +26,7 @@
 	<div class="container text-center">
 		<img alt="not found image" src="img/error.png">
 		<h3 class="display-4">Sorry! Something Went Wrong</h3>
-		<p><%=exception.printStackTrace()%>></p>
+		<p><%=exception.getMessage()%></p>
 		<a href="index.jsp" class="btn btn-standard btn-lg text-white mt-3">Home</a>
 
 

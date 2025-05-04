@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
 
+import com.tech.pulse.entities.Post;
 import com.tech.pulse.entities.User;
 
 public class UserDao {
@@ -114,6 +115,39 @@ public class UserDao {
 		}
 
 		return flag;
+	}
+
+	// Get User by User ID
+
+	public User getUserByUserId(int userId) {
+
+		User user = null;
+
+		try {
+
+			String query = "SELECT * FROM user WHERE id = ?";
+			PreparedStatement pstmt = this.con.prepareStatement(query);
+			pstmt.setInt(1, userId);
+
+			ResultSet result = pstmt.executeQuery();
+
+			while (result.next()) {
+
+				String name = result.getString("name");
+				String email = result.getString("email");
+				String pass = result.getString("password");
+				String about = result.getString("about");
+				String gender = result.getString("gender");
+
+				user = new User(name, email, pass, gender, about);
+
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return user;
 	}
 
 }

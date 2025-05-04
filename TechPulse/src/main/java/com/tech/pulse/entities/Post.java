@@ -11,11 +11,13 @@ public class Post {
 	private String photo;
 	private Timestamp date;
 	private int catId;
+	private int userId;
 
 	public Post() {
 	}
 
-	public Post(int id, String title, String content, String code, String photo, Timestamp date, int catId) {
+	public Post(int id, String title, String content, String code, String photo, Timestamp date, int catId,
+			int userId) {
 		this.id = id;
 		this.title = title;
 		this.content = content;
@@ -23,15 +25,17 @@ public class Post {
 		this.photo = photo;
 		this.date = date;
 		this.catId = catId;
+		this.userId = userId;
 	}
 
-	public Post(String title, String content, String code, String photo, Timestamp date, int catId) {
+	public Post(String title, String content, String code, String photo, Timestamp date, int catId, int userId) {
 		this.title = title;
 		this.content = content;
 		this.code = code;
 		this.photo = photo;
 		this.date = date;
 		this.catId = catId;
+		this.userId = userId;
 	}
 
 	public int getId() {
@@ -88,6 +92,14 @@ public class Post {
 
 	public void setCatId(int catId) {
 		this.catId = catId;
+	}
+
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 
 }
