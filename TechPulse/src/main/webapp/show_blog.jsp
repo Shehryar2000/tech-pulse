@@ -1,3 +1,4 @@
+<%@page import="com.tech.pulse.dao.LikedDao"%>
 <%@page import="java.text.DateFormat"%>
 <%@page import="com.tech.pulse.dao.UserDao"%>
 <%@page import="com.tech.pulse.entities.Post"%>
@@ -11,11 +12,14 @@
 <%
 int postId;
 Post post;
+LikedDao ld;
 // User login check
 if (session.getAttribute("currentUser") == null) {
 	response.sendRedirect("login.jsp");
 	return;
 } else {
+
+	ld = new LikedDao(ConnectionProvider.getConnection());
 
 	postId = Integer.parseInt(request.getParameter("pid"));
 	PostDao postDao = new PostDao(ConnectionProvider.getConnection());
@@ -43,6 +47,7 @@ if (session.getAttribute("currentUser") == null) {
 <link href="css/mystyle.css" rel="stylesheet" type="text/css">
 
 <title>TechPulse - <%=post.getTitle()%></title>
+
 </head>
 <body>
 
@@ -94,8 +99,12 @@ if (session.getAttribute("currentUser") == null) {
 					<div
 						class="card-footer d-flex justify-content-between align-items-center secondary-bg">
 						<div class="d-flex align-items-center">
-							<a href="#!" class="btn btn-sm card-footer-custom"><i
-								class="fa fa-thumbs-o-up"></i><span> 30</span></a> <a href="#!"
+							<a href="#!" class="btn btn-sm card-footer-custom"
+								onclick="doLike(<%=post.getId()%>, <%=user.getId()%>)"><i
+								class="fa <%=ld.isLikedByUser(post.getId(), user.getId()) ? "fa-thumbs-up white-thumb" : "fa-thumbs-o-up"%>"
+								id="likeBtnIcon<%=post.getId()%>" data-like-color="white-thumb"></i>
+								<span class="likeCounter" id="likeCounter<%=post.getId()%>">
+									<%=ld.countLikeOnPost(post.getId())%></span></a> <a href="#!"
 								class="btn btn-sm card-footer-custom"><i
 								class="fa fa-commenting-o"></i><span>17</span></a> <a href="#!"
 								class="btn btn-sm card-footer-custom"><i class="fa fa-share"></i><span>
@@ -105,16 +114,12 @@ if (session.getAttribute("currentUser") == null) {
 
 					</div>
 
-
 				</div>
 
 			</div>
 
 		</div>
 	</div>
-
-
-
 
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"
 		integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
@@ -124,5 +129,7 @@ if (session.getAttribute("currentUser") == null) {
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
 		crossorigin="anonymous"></script>
+
+	<script src="js/myjs.js"></script>
 </body>
 </html>

@@ -97,6 +97,14 @@
 	color: #3F51B5;
 }
 
+.white-thumb {
+	color: white !important;
+}
+
+.blue-thumb {
+	color: #3F51B5 !important;
+}
+
 /* Make the modal box smaller and centered */
 .swal-modal {
 	width: 320px;

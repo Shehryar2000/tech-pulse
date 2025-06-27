@@ -1,3 +1,5 @@
+<%@page import="com.tech.pulse.dao.LikedDao"%>
+<%@page import="com.tech.pulse.entities.User"%>
 <%@page import="com.tech.pulse.entities.Post"%>
 <%@page import="java.util.List"%>
 <%@page import="com.tech.pulse.helper.ConnectionProvider"%>
@@ -7,6 +9,10 @@
 
 	<%
 	Thread.sleep(1000);
+
+	User user = (User) session.getAttribute("currentUser");
+	LikedDao ld = new LikedDao(ConnectionProvider.getConnection());
+
 	PostDao postDao = new PostDao(ConnectionProvider.getConnection());
 	List<Post> posts = null;
 	int catId = Integer.parseInt(request.getParameter("cid"));
@@ -47,10 +53,14 @@
 				<a href="show_blog.jsp?pid=<%=p.getId()%>"
 					class="btn btn-white btn-sm">Read More</a>
 				<div class="d-flex align-items-center">
-					<a href="#!" class="btn btn-sm"><i class="fa fa-thumbs-o-up"></i><span>
-							30</span></a> <a href="#!" class="btn btn-sm"><i
-						class="fa fa-commenting-o"></i><span>17</span></a> <a href="#!"
-						class="btn btn-sm"><i class="fa fa-share"></i><span> 5</span></a>
+					<a href="#!" onclick="doLike(<%=p.getId()%>, <%=user.getId()%>)"
+						class="btn btn-sm"><i
+						class="fa <%=ld.isLikedByUser(p.getId(), user.getId()) ? "fa-thumbs-up blue-thumb" : "fa-thumbs-o-up"%>"
+						id="likeBtnIcon<%=p.getId()%>" data-like-color="blue-thumb"></i> <span
+						class="likeCounter" id="likeCounter<%=p.getId()%>"> <%=ld.countLikeOnPost(p.getId())%>
+					</span></a> <a href="#!" class="btn btn-sm"><i class="fa fa-commenting-o"></i><span>17</span></a>
+					<a href="#!" class="btn btn-sm"><i class="fa fa-share"></i><span>
+							5</span></a>
 
 				</div>
 
@@ -65,3 +75,5 @@
 	%>
 
 </div>
+
+<script src="js/myjs.js"></script>
