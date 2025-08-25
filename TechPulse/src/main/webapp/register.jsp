@@ -97,7 +97,7 @@
 								</div>
 
 								<button id="submit-btn" type="submit"
-									class="btn btn-standard w-100">Sign in</button>
+									class="btn btn-standard w-100">Sign up</button>
 							</form>
 						</div>
 						<div class="card-footer"></div>
